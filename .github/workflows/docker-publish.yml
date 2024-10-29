@@ -35,7 +35,7 @@ jobs:
           conda deactivate &&
           source /opt/conda/bin/activate mssenv &&
           [ -d "~/.cache/matplotlib" ] && rm -r ~/.cache/matplotlib/ ;
-          pytest -k 'not (test_editor or test_kmloverlay_dockwidget)' tests  \
+          pytest -v -n 6 --dist loadfile --max-worker-restart 4 tests  \
           || (for i in {1..5} \
             ; do pytest tests --last-failed --lfnf=none \
             && break \
