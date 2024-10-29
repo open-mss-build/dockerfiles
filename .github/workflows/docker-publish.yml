@@ -26,6 +26,7 @@ jobs:
           cd MSS &&
           git checkout stable &&
           source /opt/conda/bin/activate mssenv &&
+          mamba install mss --only-deps && 
           mamba install --file requirements.d/development.txt &&
           apt-get update &&
           apt-get install dialog apt-utils -y &&
