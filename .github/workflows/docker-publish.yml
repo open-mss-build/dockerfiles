@@ -31,11 +31,10 @@ jobs:
           apt-get install dialog apt-utils -y &&
           echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections &&
           apt-get install xvfb -y &&
-          mamba install pyvirtualdisplay &&
           conda deactivate &&
           source /opt/conda/bin/activate mssenv &&
           [ -d "~/.cache/matplotlib" ] && rm -r ~/.cache/matplotlib/ ;
-          pytest -v -n 6 --dist loadfile --max-worker-restart 4 tests  \
+          xvfb-run pytest -v -n 6 --dist loadfile --max-worker-restart 4 tests  \
           || (for i in {1..5} \
             ; do pytest tests --last-failed --lfnf=none \
             && break \
